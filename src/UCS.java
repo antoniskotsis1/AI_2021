@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 public class UCS {
     private  int nodesExpanded = 0;
     private final searchProblem sp;

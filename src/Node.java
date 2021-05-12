@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
+
 public class Node implements Comparable<Node>{
     private  ArrayList<Integer> state;
     private final Integer cost;

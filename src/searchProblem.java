@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 public class searchProblem {
     private final ArrayList<Integer> intiState;
     private final ArrayList<Integer> target;
