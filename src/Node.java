@@ -6,14 +6,14 @@ public class Node implements Comparable<Node>{
     private  ArrayList<Integer> state;
     private final Integer cost;
     private Node parent;
-    private int operant;
+    private String operand;
 
 
-    public Node(ArrayList<Integer> state, Integer cost, Node parent,int operant){
+    public Node(ArrayList<Integer> state, Integer cost, Node parent,String operand){
         this.parent = parent;
         this.state = state;
         this.cost = cost;
-        this.operant = operant;
+        this.operand = "T"+"("+operand+")";
     }
 
     public int getCost(){
@@ -56,6 +56,10 @@ public class Node implements Comparable<Node>{
         }  else{
             return 0;
         }
+    }
+
+    public String getOperand() {
+        return operand;
     }
 }
 

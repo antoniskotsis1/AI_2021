@@ -7,7 +7,7 @@ public class main {
         List<Integer> al = state.subList(0, k);
         List<Integer> ar = state.subList(k, state.size());
         Collections.reverse(al);
-        ArrayList<Integer> b = new ArrayList<>();
+        ArrayList<Integer> b = new ArrayList<Integer>();
         b.addAll(al);
         b.addAll(ar);
         return b;
@@ -33,7 +33,7 @@ public class main {
         int n = inp.nextInt();
         int count = 0;
         System.out.println("Give inital state: ");
-        ArrayList<Integer> initialState = new ArrayList<>();
+        ArrayList<Integer> initialState = new ArrayList<Integer>();
         while(n > count){
             initialState.add(inp.nextInt());
             count++;
@@ -41,19 +41,23 @@ public class main {
         }
         System.out.println("Type <u> to run UCS or <a> to run A* algorithm");
         String algorithm = inp.next();
-        ArrayList<Integer> target = new ArrayList<>();
+        ArrayList<Integer> target = new ArrayList<Integer>();
         target = (ArrayList)initialState.clone();
         Collections.sort(target);
-        searchProblem game = new searchProblem(target, initialState);
+        SearchProblem game = new SearchProblem(target, initialState);
 
 
         if (algorithm.equals("u")){
             System.out.println("Running ucs algorithm!");
-            UCS u = new UCS(game);
-            u.runUCS();
+            SearchAlgorithm ucs = new SearchAlgorithm(game, CostCalculator::calculateUcsCost);
+            ucs.runAlgorithm();
+
 
         }else{
             System.out.println("Running A* algorithm!");
+            SearchAlgorithm aStar = new SearchAlgorithm(game, CostCalculator::calculateAstarCost);
+            aStar.runAlgorithm();
+
         }
     }
 }

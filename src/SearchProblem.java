@@ -3,12 +3,12 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class searchProblem {
+public class SearchProblem {
     private final ArrayList<Integer> intiState;
     private final ArrayList<Integer> target;
     private final int cost = 1;
 
-    public searchProblem(ArrayList<Integer> target, ArrayList<Integer> initState){
+    public SearchProblem(ArrayList<Integer> target, ArrayList<Integer> initState ){
         this.intiState = initState;
         this.target = target;
     }
