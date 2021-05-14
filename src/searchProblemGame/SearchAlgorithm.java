@@ -30,7 +30,7 @@ public class SearchAlgorithm {
         }
     }
 
-    // returns true if a node must be discarded
+    // returns true if a child node must be discarded
     private boolean mustDiscardNode(Node childNode){
         return existsInSearchFrontier(childNode) || visitedNodes.contains(childNode);
     }
@@ -71,20 +71,19 @@ public class SearchAlgorithm {
     }
 
     public void printPath(){
-
-        ArrayList<ArrayList<Integer>> path = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> solutionPath = new ArrayList<>();
         ArrayList<String> operands = new ArrayList<>();
         int totalCost = 0;
         while (targetNode.getParent() != null){
             totalCost++;
-            path.add(targetNode.getState());
+            solutionPath.add(targetNode.getState());
             operands.add(targetNode.getOperand());
             targetNode = targetNode.getParent();
         }
-        path.add(targetNode.getState());
-        Collections.reverse(path);
+        solutionPath.add(targetNode.getState());
+        Collections.reverse(solutionPath);
         Collections.reverse(operands);
-        formattedPathOutput(path,operands);
+        formattedPathOutput(solutionPath,operands);
         System.out.print("Node(s) Expanded: ");
         System.out.println(nodesExpanded);
         System.out.print("Total Cost: ");
