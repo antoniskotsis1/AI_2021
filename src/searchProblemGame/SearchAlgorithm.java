@@ -1,3 +1,5 @@
+package searchProblemGame;
+
 import java.util.*;
 import java.util.function.BiFunction;
 
@@ -9,54 +11,48 @@ public class SearchAlgorithm {
     private final PriorityQueue<Node> searchFrontier = new PriorityQueue<>();
     private BiFunction<SearchProblem, Node, Integer> costCalculator;
 
-    public SearchAlgorithm(SearchProblem initState, BiFunction<SearchProblem, Node, Integer> costCalculator) {
-        this.sp = initState;
-        Node root = new Node(sp.getIntiState(),0,null,"mixas");
+    public SearchAlgorithm(SearchProblem initProblem, BiFunction<SearchProblem, Node, Integer> costCalculator) {
+        this.sp = initProblem;
+        Node root = new Node(sp.getInitState(),0,null,"mixas");
         searchFrontier.add(root);
         this.costCalculator = costCalculator;
     }
 
-
-
-    public void expand(Node node){
+    public void expand(Node nodeToBeExpanded){
         nodesExpanded++;
-        for(int i = 2; i <= sp.getIntiState().size(); i++){
-            ArrayList<Integer> stateAfterOperand = sp.T(i, node.getState());
-            int heuristicCost = costCalculator.apply(sp,node);
-            Node newNode = new Node(stateAfterOperand,heuristicCost,node,Integer.toString(i));
-            if(!mustDiscardNode(newNode)){
-                searchFrontier.add(newNode);
+        for(int i = 2; i <= sp.getInitState().size(); i++){
+            ArrayList<Integer> stateAfterOperand = sp.T(i, nodeToBeExpanded.getState());
+            int cost = costCalculator.apply(sp,nodeToBeExpanded);
+            Node childNode = new Node(stateAfterOperand,cost,nodeToBeExpanded,Integer.toString(i));
+            if(!mustDiscardNode(childNode)){
+                searchFrontier.add(childNode);
             }
         }
     }
 
     // returns true if a node must be discarded
-    private boolean mustDiscardNode(Node newNode){
-        return searchSFrontier(newNode) || visitedNodes.contains(newNode);
+    private boolean mustDiscardNode(Node childNode){
+        return existsInSearchFrontier(childNode) || visitedNodes.contains(childNode);
     }
 
-
-
     //returns true if the new node must be discarded
-    private boolean searchSFrontier(Node newNode){
-        for (Node node : searchFrontier)
-            if (node.equals(newNode)) {
-
-                if(newNode.getCost() >= node.getCost()){
+    private boolean existsInSearchFrontier(Node childNode){
+        for (Node searchFrontiersNode : searchFrontier)
+            if (searchFrontiersNode.equals(childNode)) {
+                if(childNode.getCost() >= searchFrontiersNode.getCost()){
                     return true;
                 }else{
-                    searchFrontier.remove(node);
+                    searchFrontier.remove(searchFrontiersNode);
                     return false;
                 }
-
             }
         return false;
     }
 
-    private boolean isTargetNode(Node newNode) {
-        if(newNode.getState().equals(sp.getTarget())){
-            targetNode = newNode;
-            System.out.println("found solution"+ newNode.getState().toString());
+    private boolean isTargetNode(Node possibleTargetNode) {
+        if(possibleTargetNode.getState().equals(sp.getTarget())){
+            targetNode = possibleTargetNode;
+            System.out.println("Found solution |->"+ possibleTargetNode.getState().toString());
             return true;
         }
         return false;
@@ -71,13 +67,10 @@ public class SearchAlgorithm {
                 break;
             }
             expand(nodeToBeExamined);
-
         }
     }
 
-
     public void printPath(){
-        System.out.print("ela mesa");
 
         ArrayList<ArrayList<Integer>> path = new ArrayList<>();
         ArrayList<String> operands = new ArrayList<>();
@@ -87,7 +80,6 @@ public class SearchAlgorithm {
             path.add(targetNode.getState());
             operands.add(targetNode.getOperand());
             targetNode = targetNode.getParent();
-
         }
         path.add(targetNode.getState());
         Collections.reverse(path);
@@ -97,8 +89,6 @@ public class SearchAlgorithm {
         System.out.println(nodesExpanded);
         System.out.print("Total Cost: ");
         System.out.println(totalCost);
-
-
     }
 
     private void formattedPathOutput(ArrayList<ArrayList<Integer>> path, ArrayList<String> operands) {
@@ -114,8 +104,6 @@ public class SearchAlgorithm {
         System.out.println("Path to solution: ");
         System.out.println(finalOutput);
     }
-
-
 }
 
 

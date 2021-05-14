@@ -1,10 +1,12 @@
-import java.util.*;
+package searchProblemGame;
+
+import java.util.ArrayList;
 
 
 public class CostCalculator {
 
     public static int calculateUcsCost(SearchProblem sp, Node node){
-        return sp.getCost()+ node.getCost();
+        return sp.getCost() + node.getCost();
     }
 
     public static int calculateAstarCost(SearchProblem sp, Node node){

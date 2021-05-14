@@ -1,15 +1,17 @@
+package searchProblemGame;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 
 public class SearchProblem {
-    private final ArrayList<Integer> intiState;
+    private final ArrayList<Integer> initState;
     private final ArrayList<Integer> target;
     private final int cost = 1;
 
     public SearchProblem(ArrayList<Integer> target, ArrayList<Integer> initState ){
-        this.intiState = initState;
+        this.initState = initState;
         this.target = target;
     }
 
@@ -17,8 +19,8 @@ public class SearchProblem {
         return target;
     }
 
-    public ArrayList<Integer> getIntiState() {
-        return intiState;
+    public ArrayList<Integer> getInitState() {
+        return initState;
     }
 
     public ArrayList<Integer> T(int k,ArrayList<Integer> currentState) {

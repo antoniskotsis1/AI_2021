@@ -1,12 +1,14 @@
+package searchProblemGame;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class Node implements Comparable<Node>{
-    private  ArrayList<Integer> state;
+    private final ArrayList<Integer> state;
     private final Integer cost;
-    private Node parent;
-    private String operand;
+    private final Node parent;
+    private final String operand;
 
 
     public Node(ArrayList<Integer> state, Integer cost, Node parent,String operand){
@@ -21,9 +23,7 @@ public class Node implements Comparable<Node>{
     }
 
     public ArrayList<Integer> getState() {
-        ArrayList<Integer> newList = new ArrayList<Integer>();
-        newList.addAll(state);
-        return newList;
+        return new ArrayList<Integer>(state);
     }
 
     public Node getParent() {
