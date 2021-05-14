@@ -12,13 +12,11 @@ public class GameInitiator {
         while(ans.equals("y")){
             System.out.print("Give N: ");
             int n = inp.nextInt();
-            int count = 0;
             System.out.println("Give initial state: ");
             ArrayList<Integer> initialState = new ArrayList<>();
-            while(n > count){
-                initialState.add(inp.nextInt());
-                count++;
-
+            while(n > initialState.size()){
+                int element = inp.nextInt();
+                initialState.add(element);
             }
             System.out.println("Type <u> to run UCS or <a> to run A* algorithm");
             String algorithm = inp.next();
